@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sabanna Master | 10th Super-Hub</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+:root {
+    --neon-blue: #00f2ff;
+    --neon-purple: #bc13fe;
+    --dark-bg: #050505;
+    --glass: rgba(255, 255, 255, 0.03);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Space Grotesk', sans-serif; }
+body { background: var(--dark-bg); color: #fff; overflow-x: hidden; line-height: 1.6; }
+
+/* ===== UNIQUE WARP LOADER ===== */
+#loader {
+    position: fixed; inset: 0; background: #000; z-index: 9999;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+}
+.warp-circle {
+    width: 100px; height: 100px; border-radius: 50%;
+    border: 2px solid var(--neon-blue);
+    box-shadow: 0 0 20px var(--neon-blue), inset 0 0 20px var(--neon-blue);
+    animation: pulse 1s infinite alternate;
+}
+@keyframes pulse { from { transform: scale(0.8); opacity: 0.5; } to { transform: scale(1.2); opacity: 1; } }
+
+/* ===== NAVIGATION ===== */
+nav {
+    padding: 20px 5%; display: flex; justify-content: space-between; align-items: center;
+    background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
+    border-bottom: 1px solid var(--glass);
+}
+.logo { font-weight: 700; font-size: 1.5rem; background: linear-gradient(to right, var(--neon-blue), var(--neon-purple)); -webkit-background-clip: text; color: transparent; }
+
+/* ===== POMODORO TIMER ===== */
+.timer-box {
+    background: var(--glass); margin: 30px 5%; padding: 20px; border-radius: 20px;
+    border: 1px solid var(--neon-blue); text-align: center;
+}
+#timer-display { font-size: 3rem; font-weight: 700; color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue); }
+
+/* ===== MAIN HUB GRID ===== */
+.grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px; padding: 40px 5%;
+}
+.card {
+    background: var(--glass); border-radius: 25px; padding: 30px;
+    border: 1px solid rgba(255,255,255,0.1); transition: 0.5s; cursor: pointer;
+    position: relative; overflow: hidden;
+}
+.card:hover { transform: translateY(-10px); border-color: var(--neon-purple); background: rgba(188, 19, 254, 0.05); }
+.card i { font-size: 2.5rem; margin-bottom: 15px; color: var(--neon-blue); }
+
+/* ===== MEMORY FLASHCARDS ===== */
+.flashcard {
+    perspective: 1000px; height: 150px; margin-bottom: 20px;
+}
+.flashcard-inner {
+    position: relative; width: 100%; height: 100%; transition: transform 0.6s;
+    transform-style: preserve-3d; cursor: pointer;
+}
+.flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+.front, .back {
+    position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 15px; padding: 20px; text-align: center; border: 1px solid var(--glass);
+}
+.front { background: #111; }
+.back { background: var(--neon-purple); color: white; transform: rotateY(180deg); }
+
+/* ===== MODALS ===== */
+.modal {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 1000;
+    display: none; justify-content: center; align-items: center; padding: 20px;
+}
+.modal-content {
+    background: #0a0a0a; width: 100%; max-width: 700px; padding: 40px;
+    border-radius: 30px; border: 1px solid var(--neon-blue); position: relative;
+    max-height: 80vh; overflow-y: auto;
+}
+.close { position: absolute; top: 20px; right: 20px; font-size: 2rem; cursor: pointer; }
+
+/* ===== SCROLL REVEAL ===== */
+.reveal { opacity: 0; transform: translateY(40px); transition: 1s all ease; }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+/* Mobile UI */
+@media (max-width: 600px) {
+    .grid { grid-template-columns: 1fr; }
+    #timer-display { font-size: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<div id="loader">
+    <div class="warp-circle"></div>
+    <p style="margin-top: 20px; letter-spacing: 3px; color: var(--neon-blue);">SABANNA MASTER HUB</p>
+</div>
+
+<nav>
+    <div class="logo">SABANNA MASTER</div>
+</nav>
+
+<section class="timer-box reveal">
+    <h3>🚀 Focus Study Session (50/10 Rule)</h3>
+    <div id="timer-display">50:00</div>
+    <button onclick="startTimer()" style="background:var(--neon-blue); border:none; padding:10px 20px; border-radius:10px; cursor:pointer; font-weight:700;">START FOCUS</button>
+</section>
+
+<div class="grid">
+    <div class="card reveal" onclick="openModal('memoryModal')">
+        <i class="fas fa-brain"></i>
+        <h3>Active Recall Cards</h3>
+        <p>Flip cards to test your 10th memory instantly.</p>
+    </div>
+
+    <div class="card reveal" onclick="openModal('mistakeModal')">
+        <i class="fas fa-exclamation-triangle" style="color:#ff4757;"></i>
+        <h3>Common Marks Losers</h3>
+        <p>Small mistakes that cost you 10-15 marks.</p>
+    </div>
+
+    <div class="card reveal" onclick="openModal('skillModal')">
+        <i class="fas fa-laptop-code"></i>
+        <h3>Beyond 10th Skills</h3>
+        <p>Why you should learn coding & typing now.</p>
+    </div>
+
+    <div class="card reveal" onclick="openModal('disciplineModal')">
+        <i class="fas fa-shield-alt"></i>
+        <h3>The Discipline Code</h3>
+        <p>How to stay obedient to your goals and parents.</p>
+    </div>
+</div>
+
+<div id="memoryModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModals()">&times;</span>
+        <h2>Self-Testing Cards</h2>
+        <p>Click to flip and see the answer!</p>
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+            <div class="flashcard-inner">
+                <div class="front">What is the formula for the volume of a Sphere?</div>
+                <div class="back">$$\frac{4}{3} \pi r^3$$</div>
+            </div>
+        </div>
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+            <div class="flashcard-inner">
+                <div class="front">How many types of 'Sandhi' are there in Kannada?</div>
+                <div class="back">Lopa, Agama, and Adesha (Samskruta and Kannada Sandhis).</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="mistakeModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModals()">&times;</span>
+        <h2 style="color:#ff4757;">Stop Losing Marks!</h2>
+        <ul style="text-align:left; margin-top:20px; list-style:none;">
+            <li>❌ <b>Maths:</b> Forgetting to write the "unit" (cm, m², kg).</li>
+            <li>❌ <b>Science:</b> Not labeling diagrams. An unlabeled heart = 0 marks!</li>
+            <li>❌ <b>Social:</b> Writing long paragraphs. Use <b>Bullet Points</b> instead.</li>
+            <li>❌ <b>Kannada:</b> Making spelling mistakes in simple words.</li>
+        </ul>
+    </div>
+</div>
+
+<div id="disciplineModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModals()">&times;</span>
+        <h2>The Obedient Student Path</h2>
+        <p>Obedience isn't about being weak; it's about being **Master of Yourself**.</p>
+        <ul style="text-align:left; margin-top:20px;">
+            <li><b>Morning Routine:</b> Wake up at 5:00 AM. This is when the brain is sharpest.</li>
+            <li><b>No Distraction:</b> Keep your phone in another room while studying.</li>
+            <li><b>Respect:</b> Treat your teachers as guides to your future wealth.</li>
+        </ul>
+    </div>
+</div>
+
+<div class="card reveal" style="margin: 40px 5%; text-align: center; border: 1px dashed var(--neon-blue);">
+    <h2>Need Personal Guidance?</h2>
+    <p>Message Sabanna Master directly.</p>
+    <button onclick="window.open('https://wa.me/919663321579?text=Namaste+Master,+I+need+help+with+my+10th+studies.','_blank')" style="margin-top:20px; background:#25d366; color:white; padding:15px 30px; border-radius:50px; border:none; font-weight:700; cursor:pointer;">WHATSAPP ME</button>
+</div>
+
+<script>
+// LOADER
+window.onload = () => {
+    setTimeout(() => {
+        document.getElementById('loader').style.display = 'none';
+    }, 1500);
+    reveal();
+};
+
+// SCROLL REVEAL
+function reveal() {
+    let reveals = document.querySelectorAll(".reveal");
+    reveals.forEach(el => {
+        let windowHeight = window.innerHeight;
+        let elementTop = el.getBoundingClientRect().top;
+        if (elementTop < windowHeight - 100) el.classList.add("active");
+    });
+}
+window.addEventListener("scroll", reveal);
+
+// MODALS
+function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+function closeModals() { document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); }
+
+// POMODORO TIMER
+let timer;
+function startTimer() {
+    let timeLeft = 50 * 60;
+    clearInterval(timer);
+    timer = setInterval(() => {
+        let mins = Math.floor(timeLeft / 60);
+        let secs = timeLeft % 60;
+        document.getElementById('timer-display').innerText = `${mins}:${secs < 10 ? '0'+secs : secs}`;
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            alert("Focus time over! Take a 10 min break.");
+        }
+        timeLeft--;
+    }, 1000);
+}
+</script>
+
+</body>
+</html>
