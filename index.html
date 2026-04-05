@@ -1,318 +1,231 @@
-```html id="ultimatefinalpro"
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sabanna Master | Kannada Educator</title>
+<title>Sabanna Master | The Kannadiga</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
+:root {
+  --primary: #38bdf8;
+  --accent: #facc15;
+  --bg-dark: #020617;
+  --glass: rgba(255, 255, 255, 0.05);
+}
+
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
 
-body{
-  color:white;
-  overflow-x:hidden;
-
-  /* Karnataka theme gradient */
-  background:linear-gradient(135deg,#0b0f1a,#1e293b,#7f1d1d);
+body {
+  color: white;
+  background: radial-gradient(circle at top right, #1e293b, #020617, #7f1d1d);
+  background-attachment: fixed;
+  overflow-x: hidden;
 }
 
-/* ===== LOADER ===== */
-#loader{
-  position:fixed;
-  width:100%;height:100%;
-  background:#020617;
-  display:flex;justify-content:center;align-items:center;
-  flex-direction:column;
-  z-index:9999;
+/* ===== ENHANCED DYNAMIC LOADER ===== */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-dark);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  transition: opacity 0.6s ease;
 }
-.loader-text{
-  font-size:28px;
-  letter-spacing:3px;
-  color:#38bdf8;
-  animation:fade 1.5s infinite alternate;
+.loader-content { text-align: center; }
+.loader-text {
+  font-size: clamp(24px, 5vw, 40px);
+  font-weight: 800;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary));
+  background-size: 200%;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: shine 2s linear infinite;
 }
-@keyframes fade{
-  from{opacity:0.4;}
-  to{opacity:1;}
-}
-
-/* ===== NEWS TICKER ===== */
-.ticker{
-  width:100%;
-  background:#111827;
-  overflow:hidden;
-  white-space:nowrap;
-}
-.ticker p{
-  display:inline-block;
-  padding:10px;
-  animation:scrollText 15s linear infinite;
-}
-@keyframes scrollText{
-  from{transform:translateX(100%);}
-  to{transform:translateX(-100%);}
+@keyframes shine {
+  to { background-position: 200%; }
 }
 
-/* ===== NAV ===== */
-nav{
-  position:fixed;
-  width:100%;
-  top:40px;
-  display:flex;
-  justify-content:space-between;
-  padding:15px 25px;
-  background:rgba(0,0,0,0.6);
-  backdrop-filter:blur(10px);
-  z-index:1000;
+/* ===== MODERN NAVIGATION ===== */
+nav {
+  position: fixed;
+  top: 0; width: 100%;
+  padding: 20px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(2, 6, 23, 0.8);
+  backdrop-filter: blur(15px);
+  z-index: 2000;
+  border-bottom: 1px solid var(--glass);
 }
-nav h2{color:#38bdf8;}
+nav h2 { font-weight: 800; font-size: 1.5rem; color: var(--primary); }
 
-nav ul{
-  display:flex;
-  list-style:none;
+#menu { display: flex; list-style: none; gap: 30px; }
+#menu li { cursor: pointer; font-weight: 600; transition: 0.3s; position: relative; }
+#menu li:hover { color: var(--accent); }
+
+.menu-btn { display: none; font-size: 1.8rem; cursor: pointer; color: var(--primary); }
+
+/* ===== HERO SECTION ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 100px 8% 50px;
+  gap: 50px;
 }
-nav ul li{margin-left:20px;cursor:pointer;}
+.hero-text { flex: 1; }
+.hero-text h1 {
+  font-size: clamp(40px, 8vw, 70px);
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+.hero-text span { color: var(--accent); }
 
-.menu-btn{display:none;}
+.video-container {
+  flex: 1;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(56, 189, 248, 0.2);
+  border: 1px solid var(--glass);
+}
+.video-container iframe { width: 100%; aspect-ratio: 16/9; border: none; display: block; }
 
-@media(max-width:768px){
-  nav ul{
-    display:none;
-    flex-direction:column;
-    background:#020617;
-    position:absolute;
-    top:60px;width:100%;
-    text-align:center;
+/* ===== BUTTONS & CARDS ===== */
+.btn {
+  padding: 15px 35px;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(45deg, var(--primary), #0ea5e9);
+  color: #000;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.4s;
+  box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
+}
+.btn:hover { transform: scale(1.05); filter: brightness(1.1); }
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  padding: 20px;
+}
+.card {
+  background: var(--glass);
+  padding: 40px 20px;
+  border-radius: 20px;
+  border: 1px solid var(--glass);
+  transition: 0.4s ease;
+  text-align: center;
+}
+.card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-10px);
+  border-color: var(--primary);
+}
+
+/* ===== SCROLL REVEAL ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 1s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+}
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+/* ===== MOBILE RESPONSIVENESS ===== */
+@media (max-width: 900px) {
+  .hero { flex-direction: column; text-align: center; padding-top: 120px; }
+  .menu-btn { display: block; }
+  #menu {
+    position: fixed;
+    top: 70px; left: -100%;
+    width: 100%; height: calc(100vh - 70px);
+    background: var(--bg-dark);
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+    transition: 0.5s;
   }
-  nav ul li{margin:15px 0;}
-  .menu-btn{display:block;}
+  #menu.active { left: 0; }
 }
 
-/* ===== HERO ===== */
-.hero{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:140px 40px 60px;
-  gap:30px;
+.whatsapp {
+  position: fixed;
+  bottom: 30px; right: 30px;
+  background: #25D366;
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  color: white;
+  z-index: 3000;
+  animation: pulse 2s infinite;
 }
-
-.hero-text h1{
-  font-size:45px;
-  background:linear-gradient(90deg,#38bdf8,#facc15);
-  -webkit-background-clip:text;
-  color:transparent;
-}
-.hero-text p{color:#cbd5e1;margin-top:10px;}
-
-.btn{
-  margin-top:20px;
-  padding:12px 28px;
-  border:none;
-  border-radius:30px;
-  background:linear-gradient(45deg,#38bdf8,#facc15);
-  color:black;
-  cursor:pointer;
-  font-weight:bold;
-}
-
-/* VIDEO */
-.video-card{
-  flex:1;
-  background:rgba(255,255,255,0.05);
-  padding:15px;
-  border-radius:15px;
-}
-.video-card iframe{
-  width:100%;
-  height:250px;
-  border-radius:10px;
-}
-
-/* ===== SECTION ===== */
-.section{
-  padding:80px 20px;
-  text-align:center;
-}
-
-/* ===== CARDS ===== */
-.cards{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:20px;
-}
-.card{
-  width:250px;
-  padding:25px;
-  border-radius:15px;
-  background:rgba(255,255,255,0.05);
-  transition:0.3s;
-}
-.card:hover{
-  transform:translateY(-10px);
-  box-shadow:0 0 25px rgba(250,204,21,0.4);
-}
-
-/* ===== GALLERY ===== */
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:15px;
-}
-
-.gallery-item{
-  position:relative;
-  overflow:hidden;
-  border-radius:12px;
-}
-.gallery-item img{
-  width:100%;
-  transition:0.4s;
-}
-.gallery-item:hover img{
-  transform:scale(1.2);
-}
-
-.gallery-item::after{
-  content:"View";
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  opacity:0;
-  color:white;
-  font-size:20px;
-  transition:0.3s;
-}
-.gallery-item:hover::after{
-  opacity:1;
-}
-
-/* ===== CONTACT ===== */
-.contact-box{
-  max-width:500px;
-  margin:auto;
-  padding:30px;
-  border-radius:20px;
-  background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(10px);
-}
-input,textarea{
-  width:100%;
-  padding:12px;
-  margin:10px 0;
-  border:none;
-  border-radius:10px;
-  background:#1e293b;
-  color:white;
-}
-
-/* ===== SCROLL ANIMATION ===== */
-.reveal{
-  opacity:0;
-  transform:translateY(60px);
-  transition:all 0.8s ease;
-}
-.reveal.active{
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* ===== WHATSAPP ===== */
-.whatsapp{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#25D366;
-  padding:15px;
-  border-radius:50%;
-}
-
-/* MOBILE */
-@media(max-width:768px){
-  .hero{
-    flex-direction:column;
-    text-align:center;
-  }
-  .video-card iframe{
-    height:180px;
-  }
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+  70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOADER -->
 <div id="loader">
-  <div class="loader-text">SABANNA MASTER</div>
+  <div class="loader-content">
+    <div class="loader-text">Sabanna Master</div>
+    <p style="color: #64748b; letter-spacing: 5px; margin-top: 10px;">THE KANNADIGA</p>
+  </div>
 </div>
 
-<!-- NEWS -->
-<div class="ticker">
-  <p>📢 New Videos Uploaded | Join Classes | 10th & PUC Important Topics Available</p>
-</div>
-
-<!-- NAV -->
 <nav>
   <h2>Sabanna Master</h2>
-  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+  <div class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
   <ul id="menu">
     <li onclick="go('home')">Home</li>
-    <li onclick="go('teach')">Teach</li>
-    <li onclick="go('gallery')">Gallery</li>
+    <li onclick="go('teach')">Education</li>
     <li onclick="go('contact')">Contact</li>
   </ul>
 </nav>
 
-<!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-text">
-    <h1>Learn Smart in Kannada</h1>
-    <p>Helping students understand difficult concepts easily.</p>
-    <button class="btn" onclick="window.open('https://youtube.com/@sabanna_master','_blank')">Start Learning</button>
+    <h1 class="reveal">Master Your <br><span>Future</span> in Kannada</h1>
+    <p class="reveal" style="margin-bottom: 30px; color: #94a3b8;">Simplifying education for students across Karnataka. Join our community and clear your backlogs with ease.</p>
+    <button class="btn reveal" onclick="window.open('https://youtube.com/@sabanna_master','_blank')">Explore Channel</button>
   </div>
 
-  <div class="video-card">
-    <iframe src="https://www.youtube.com/embed/SuatNcvRpKs?autoplay=1&mute=1&playsinline=1"></iframe>
+  <div class="video-container reveal">
+    <iframe src="https://www.youtube.com/embed/SuatNcvRpKs?autoplay=1&mute=1&loop=1&playlist=SuatNcvRpKs"></iframe>
   </div>
 </section>
 
-<!-- TEACH -->
-<section class="section reveal" id="teach">
-  <h2>📘 What I Teach</h2>
+<section class="section reveal" id="teach" style="padding: 100px 5%;">
+  <h2 style="text-align:center; font-size: 2.5rem; margin-bottom: 50px;">Specialized Coaching</h2>
   <div class="cards">
-    <div class="card">10th Backlogs</div>
-    <div class="card">PUC Topics</div>
-    <div class="card">Easy Kannada Learning</div>
-    <div class="card">Exam Preparation</div>
+    <div class="card"><i class="fas fa-book-open" style="font-size: 2rem; color: var(--accent); margin-bottom: 15px;"></i><h3>10th Backlogs</h3></div>
+    <div class="card"><i class="fas fa-graduation-cap" style="font-size: 2rem; color: var(--primary); margin-bottom: 15px;"></i><h3>PUC Concepts</h3></div>
+    <div class="card"><i class="fas fa-language" style="font-size: 2rem; color: #f43f5e; margin-bottom: 15px;"></i><h3>Kannada Grammar</h3></div>
   </div>
 </section>
 
-<!-- GALLERY -->
-<section class="section reveal" id="gallery">
-  <h2>Gallery</h2>
-  <div class="gallery">
-    <div class="gallery-item"><img src="motivation img.png"></div>
-    <div class="gallery-item"><img src="motivation img 1.png"></div>
-    <div class="gallery-item"><img src="motivation img 2.png"></div>
-    <div class="gallery-item"><img src="motivation img 3.png"></div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="section reveal" id="contact">
-  <h2>Contact</h2>
-  <div class="contact-box">
-    <input placeholder="Your Name">
-    <input placeholder="Your Email">
-    <textarea placeholder="Your Message"></textarea>
-    <button class="btn">Send Message</button>
+<section class="section reveal" id="contact" style="padding: 100px 5%; text-align: center;">
+  <div style="max-width: 600px; margin: auto; background: var(--glass); padding: 40px; border-radius: 30px;">
+    <h2 style="margin-bottom: 20px;">Get In Touch</h2>
+    <input type="text" placeholder="Name" style="width:100%; padding: 15px; margin: 10px 0; border-radius: 10px; border: none; background: #0f172a; color: white;">
+    <textarea placeholder="Message" rows="4" style="width:100%; padding: 15px; margin: 10px 0; border-radius: 10px; border: none; background: #0f172a; color: white;"></textarea>
+    <button class="btn" style="width: 100%;">Send Message</button>
   </div>
 </section>
 
@@ -321,26 +234,36 @@ input,textarea{
 </a>
 
 <script>
-window.onload=()=>{document.getElementById("loader").style.display="none";}
+// Handle Loader
+window.addEventListener('load', () => {
+  const loader = document.getElementById("loader");
+  setTimeout(() => {
+    loader.style.opacity = "0";
+    setTimeout(() => loader.style.display = "none", 600);
+  }, 1500);
+});
 
+// Mobile Menu Toggle
 function toggleMenu(){
-  let m=document.getElementById("menu");
-  m.style.display=(m.style.display==="flex")?"none":"flex";
+  const menu = document.getElementById("menu");
+  menu.classList.toggle("active");
 }
 
+// Smooth Scroll
 function go(id){
   document.getElementById(id).scrollIntoView({behavior:"smooth"});
+  document.getElementById("menu").classList.remove("active");
 }
 
-window.addEventListener("scroll",()=>{
-  document.querySelectorAll(".reveal").forEach(el=>{
-    if(el.getBoundingClientRect().top < window.innerHeight-100){
-      el.classList.add("active");
-    }
+// Reveal on Scroll Logic
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) entry.target.classList.add('active');
   });
-});
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 
 </body>
 </html>
-```
