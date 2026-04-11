@@ -28,7 +28,7 @@ body {
   overflow-x: hidden;
 }
 
-/* ===== LOADER (REPLACED) ===== */
+/* ===== LOADER ===== */
 #loader {
   position: fixed;
   inset: 0;
@@ -43,7 +43,6 @@ body {
   transition: opacity 0.8s ease;
 }
 
-/* pulse ring */
 .pulse-ring {
   position: absolute;
   width: 200px;
@@ -59,13 +58,8 @@ body {
   100% { transform: scale(0.8); opacity: 0.4; }
 }
 
-/* center */
-.center {
-  text-align: center;
-  z-index: 2;
-}
+.center { text-align: center; z-index: 2; }
 
-/* dots logo */
 .logo {
   display: flex;
   justify-content: center;
@@ -89,22 +83,10 @@ body {
   50% { transform: translateY(-8px); opacity: 1; }
 }
 
-.text {
-  font-size: 15px;
-  font-weight: 600;
-  opacity: 0.9;
-}
+.text { font-size: 15px; font-weight: 600; opacity: 0.9; }
+.kannada { font-size: 13px; margin-top: 5px; color: #ffcc00; }
 
-.kannada {
-  font-size: 13px;
-  margin-top: 5px;
-  color: #ffcc00;
-  opacity: 0.9;
-}
-
-.fade-out {
-  opacity: 0;
-}
+.fade-out { opacity: 0; }
 
 /* ===== NAV ===== */
 nav {
@@ -163,7 +145,7 @@ nav h2 { font-weight: 800; font-size: 1.5rem; color: var(--primary); }
   opacity: 1;
 }
 
-/* ===== BUTTONS / CARDS / WHATSAPP (UNCHANGED) ===== */
+/* ===== BUTTONS ===== */
 .btn {
   padding: 15px 35px;
   border: none;
@@ -172,19 +154,6 @@ nav h2 { font-weight: 800; font-size: 1.5rem; color: var(--primary); }
   color: #000;
   font-weight: 700;
   cursor: pointer;
-}
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 25px;
-  padding: 20px;
-}
-.card {
-  background: var(--glass);
-  padding: 40px 20px;
-  border-radius: 24px;
-  text-align: center;
 }
 
 .whatsapp {
@@ -212,7 +181,6 @@ nav h2 { font-weight: 800; font-size: 1.5rem; color: var(--primary); }
 
 <body>
 
-<!-- LOADER (NEW) -->
 <div id="loader">
   <div class="pulse-ring"></div>
   <div class="center">
@@ -229,8 +197,6 @@ nav h2 { font-weight: 800; font-size: 1.5rem; color: var(--primary); }
   <div class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
   <ul id="menu">
     <li onclick="go('home')">Home</li>
-    <li onclick="go('teach')">Education</li>
-    <li onclick="go('importance')">Why 10th?</li>
   </ul>
 </nav>
 
@@ -252,42 +218,20 @@ nav h2 { font-weight: 800; font-size: 1.5rem; color: var(--primary); }
   </div>
 </section>
 
-<section id="teach" style="padding:100px 5%;">
-  <h2 style="text-align:center;">Specialized Coaching</h2>
-  <div class="cards">
-    <div class="card">10th Backlogs</div>
-    <div class="card">PUC Concepts</div>
-    <div class="card">Kannada Grammar</div>
-  </div>
-</section>
-
-<section id="importance" style="padding:100px 5%; text-align:center;">
-  <h2>Why 10th is Important</h2>
-  <div class="cards">
-    <div class="card">Master Key Stage</div>
-    <div class="card">Career Roadmap</div>
-    <div class="card">Mental Strength</div>
-  </div>
-</section>
-
 <a href="https://wa.me/919663321579" class="whatsapp">
   <i class="fab fa-whatsapp"></i>
 </a>
 
 <script>
-// loader (5 sec)
 window.addEventListener("load", () => {
   setTimeout(() => {
     document.getElementById("loader").classList.add("fade-out");
-
     setTimeout(() => {
       document.getElementById("loader").style.display = "none";
     }, 800);
-
   }, 5000);
 });
 
-// menu
 function toggleMenu(){
   document.getElementById("menu").classList.toggle("active");
 }
@@ -297,7 +241,6 @@ function go(id){
   document.getElementById("menu").classList.remove("active");
 }
 
-// slider
 const images = document.querySelectorAll(".video-container img");
 let currentIndex = 0;
 
