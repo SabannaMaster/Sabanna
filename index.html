@@ -176,6 +176,135 @@ nav h2 { font-weight: 800; font-size: 1.5rem; color: var(--primary); }
   #menu.active { left: 0; }
   .menu-btn { display: block; }
 }
+
+
+.body1 {
+    background: linear-gradient(135deg, #1d2671, #c33764);
+    min-height: 100vh;
+    color: white;
+}
+/* Title */
+.studentgrowthhub {
+    text-align: center;
+    padding: 30px 15px;
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+}
+
+/* Grid Layout */
+.container1 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Card Design */
+.card1 {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 30px 20px;
+    text-align: center;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp 0.8s ease forwards;
+    opacity: 0;
+}
+
+/* Glow effect */
+.card1::before {
+    content: "";
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.2), transparent);
+    transform: rotate(25deg);
+    top: -100%;
+    left: -100%;
+    transition: 0.6s;
+}
+
+.card1:hover::before {
+    top: 100%;
+    left: 100%;
+}
+
+/* Hover effect */
+.card1:hover {
+    transform: translateY(-10px) scale(1.04);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+}
+
+/* Text */
+.card1 h3 {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+/* Small Kannada Tag */
+.tag1 {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 0.8rem;
+    opacity: 0.8;
+    color: #ffd369;
+}
+
+/* Animation delay */
+.card1:nth-child(1){ animation-delay: 0.2s;}
+.card1:nth-child(2){ animation-delay: 0.4s;}
+.card1:nth-child(3){ animation-delay: 0.6s;}
+.card1:nth-child(4){ animation-delay: 0.8s;}
+.card1:nth-child(5){ animation-delay: 1s;}
+.card1:nth-child(6){ animation-delay: 1.2s;}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 900px) {
+    .container1 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .studentgrowthhub {
+        font-size: 1.4rem;
+        padding: 20px 10px;
+    }
+
+    .container1 {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .card1 {
+        padding: 18px 12px;
+    }
+
+    .card1 h3 {
+        font-size: 0.95rem;
+    }
+
+    .tag1 {
+        font-size: 0.7rem;
+    }
+}
 </style>
 </head>
 
@@ -217,6 +346,46 @@ nav h2 { font-weight: 800; font-size: 1.5rem; color: var(--primary); }
     <img src="success5.png">
   </div>
 </section>
+
+<<div class="body1">
+<div class="studentgrowthhub">
+<h1>🚀 Student Growth Hub</h1>
+</div>
+<div class="container1">
+
+    <div class="card1">
+        <h3>Earn While Learning</h3>
+        <span class="tag1">ಕಲಿಯುತ್ತಾ ಸಂಪಾದನೆ</span>
+    </div>
+
+    <div class="card1">
+        <h3>How to Prepare for Board Exams</h3>
+        <span class="tag1">ಪರೀಕ್ಷೆ ತಯಾರಿ</span>
+    </div>
+
+    <div class="card1">
+        <h3>Clear 10th Backlogs Easily</h3>
+        <span class="tag1">ಬ್ಯಾಕ್ಲಾಗ್ ಕ್ಲಿಯರ್</span>
+    </div>
+
+    <div class="card1">
+        <h3>Start Your Own Business After 10th</h3>
+        <span class="tag1">ಸ್ವಂತ ವ್ಯವಹಾರ</span>
+    </div>
+
+    <div class="card1">
+        <h3>Tricks to Gain Extra Skills</h3>
+        <span class="tag1">ಕೌಶಲ್ಯಗಳು</span>
+    </div>
+
+    <div class="card1">
+        <h3>Part-Time Work for Students</h3>
+        <span class="tag1">ಪಾರ್ಟ್ ಟೈಮ್ ಕೆಲಸ</span>
+    </div>
+
+</div>
+</div>
+
 
 <a href="https://wa.me/919663321579" class="whatsapp">
   <i class="fab fa-whatsapp"></i>
